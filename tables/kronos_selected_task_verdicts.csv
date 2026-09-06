@@ -1,0 +1,11 @@
+method,dataset,task,kind,raw_passed,protocol_passed,verdict,dataset_controls_ok,auc,std,count
+kronos,bc_jackson2020,motif_apc_t_contact,spatial,False,False,fail_control_block,False,0.5622317085016134,0.049720030978292,15
+kronos,bc_jackson2020,motif_cd8_tumor_contact,spatial,True,False,fail_control_block,False,0.6211470108144224,0.0653550749159945,15
+kronos,bc_jackson2020,motif_macrophage_tumor_niche,spatial,False,False,fail_control_block,False,0.5369840561410949,0.0765895963431521,15
+kronos,bc_jackson2020,motif_t_tumor_mixing,spatial,True,False,fail_control_block,False,0.6441630242903946,0.0707383402199731,15
+kronos,bc_jackson2020,motif_tumor_high,control,False,False,fail_control,False,0.8387785054036384,0.0333530655523525,15
+kronos,bc_metabric_ali2020,motif_interface_immune,spatial,True,False,fail_control_block,False,0.613082833097581,0.0352768906725112,15
+kronos,bc_metabric_ali2020,motif_tumor_stroma_mixing,spatial,False,False,fail_control_block,False,0.5967312768131489,0.0759734724800668,15
+kronos,hnc_wu2022,motif_cd8_clustering,spatial,True,False,fail_control_block,False,0.6129998796743289,0.1048060224453653,15
+kronos,hnc_wu2022,motif_immune_exclusion,spatial,True,False,fail_control_block,False,0.7063500584194474,0.0715373144214922,15
+kronos,tnbc_wang2023,motif_cd8_high,control,True,True,pass_control,False,0.9243832462365696,0.0166377325387877,15

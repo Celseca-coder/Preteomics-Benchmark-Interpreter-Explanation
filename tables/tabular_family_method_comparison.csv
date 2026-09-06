@@ -1,0 +1,9 @@
+method,n_control,n_control_passed,n_spatial,n_spatial_blocked,n_spatial_scored,n_spatial_passed_protocol,n_spatial_passed_raw,control_ok,protocol_spatial,raw_spatial,protocol_control,family,explainer
+lasso_composition,2,2,8,2,6,0,0,True,0/6,0/8,2/2,composition,lasso
+shap_composition,2,2,8,2,6,0,0,True,0/6,0/8,2/2,composition,shap
+lasso_density,2,2,8,0,8,2,2,True,2/8,2/8,2/2,density,lasso
+shap_density,2,2,8,0,8,2,2,True,2/8,2/8,2/2,density,shap
+lasso_mixing,2,0,8,8,0,0,6,False,0/8,6/8,0/2,mixing,lasso
+shap_mixing,2,0,8,8,0,0,6,False,0/8,6/8,0/2,mixing,shap
+lasso_point_pattern,2,0,8,8,0,0,6,False,0/8,6/8,0/2,point_pattern,lasso
+shap_point_pattern,2,0,8,8,0,0,6,False,0/8,6/8,0/2,point_pattern,shap

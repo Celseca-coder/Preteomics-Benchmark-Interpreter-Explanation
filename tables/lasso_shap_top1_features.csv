@@ -1,0 +1,79 @@
+dataset,task,feature,n_folds_top1,n_folds,frac_top1,method
+bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Macrophage__to__T cell,15,15,1.0,lasso
+bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__T cell,7,15,0.4666666666666667,lasso
+bc_jackson2020,motif_cd8_tumor_contact,mixing::local_mixing_std,5,15,0.3333333333333333,lasso
+bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__Stromal cells,3,15,0.2,lasso
+bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Macrophage__to__Stromal cells,15,15,1.0,lasso
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__T cell,6,15,0.4,lasso
+bc_jackson2020,motif_t_tumor_mixing,mixing::local_mixing_std,3,15,0.2,lasso
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__Stromal cells,3,15,0.2,lasso
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__Tumor (CK lo HR lo),2,15,0.13333333333333333,lasso
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__B cell__to__T cell,1,15,0.06666666666666667,lasso
+bc_jackson2020,motif_tumor_high,composition::Stromal cells,11,15,0.7333333333333333,lasso
+bc_jackson2020,motif_tumor_high,density::tumor_area_ratio,4,15,0.26666666666666666,lasso
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__HER2+__to__HRlow CKlow,7,15,0.4666666666666667,lasso
+bc_metabric_ali2020,motif_interface_immune,point-pattern::HR+ CK7-_L_r200,5,15,0.3333333333333333,lasso
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__Hypoxia__to__Endothelial,2,15,0.13333333333333333,lasso
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__B cells__to__Basal CKlow,1,15,0.06666666666666667,lasso
+bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::shannon_entropy_normalized,15,15,1.0,lasso
+hnc_wu2022,motif_cd8_clustering,mixing::neighbor_fraction__CD8 T cell__to__CD8 T cell,15,15,1.0,lasso
+hnc_wu2022,motif_immune_exclusion,density::tumor_area_ratio,11,15,0.7333333333333333,lasso
+hnc_wu2022,motif_immune_exclusion,mixing::neighbor_fraction__CD8 T cell__to__Tumor,4,15,0.26666666666666666,lasso
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__Treg__to__CD8^+PD1^+T_{Ex},3,15,0.2,lasso
+tnbc_wang2023,motif_cd8_high,mixing::local_mixing_max,2,15,0.13333333333333333,lasso
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__M2 Mac__to__CD8^+T,2,15,0.13333333333333333,lasso
+tnbc_wang2023,motif_cd8_high,point-pattern::CD8^+T_L_r50,2,15,0.13333333333333333,lasso
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__CD56^+NK__to__DCs,1,15,0.06666666666666667,lasso
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__M2 Mac__to__Treg,1,15,0.06666666666666667,lasso
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__Treg__to__CD8^+T,1,15,0.06666666666666667,lasso
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__pH2AX^{+}DSB__to__CD8^+T,1,15,0.06666666666666667,lasso
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__pH2AX^{+}DSB__to__Endothelial,1,15,0.06666666666666667,lasso
+tnbc_wang2023,motif_cd8_high,mixing::shannon_entropy_global,1,15,0.06666666666666667,lasso
+bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Macrophage__to__T cell,12,15,0.8,shap
+bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Tumor (Hypoxic)__to__Tumor (CK lo HR hi p53+),2,15,0.13333333333333333,shap
+bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Tumor (CK7+ CK hi Ecadh hi)__to__Tumor (CK lo HR hi p53+),1,15,0.06666666666666667,shap
+bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__Stromal cells,7,15,0.4666666666666667,shap
+bc_jackson2020,motif_cd8_tumor_contact,mixing::local_mixing_std,4,15,0.26666666666666666,shap
+bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__T cell,2,15,0.13333333333333333,shap
+bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__Endothelial__to__Tumor (CK lo HR hi p53+),1,15,0.06666666666666667,shap
+bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__Tumor (CK lo HR lo),1,15,0.06666666666666667,shap
+bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Macrophage__to__Stromal cells,12,15,0.8,shap
+bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Endothelial__to__Tumor (CK lo HR hi p53+),2,15,0.13333333333333333,shap
+bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Tumor (CK lo HR hi p53+)__to__T & B cells,1,15,0.06666666666666667,shap
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__Stromal cells,6,15,0.4,shap
+bc_jackson2020,motif_t_tumor_mixing,mixing::local_mixing_std,3,15,0.2,shap
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__T cell,2,15,0.13333333333333333,shap
+bc_jackson2020,motif_t_tumor_mixing,mixing::shannon_entropy_global,2,15,0.13333333333333333,shap
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__Endothelial__to__Tumor (CK lo HR hi p53+),1,15,0.06666666666666667,shap
+bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__Tumor (CK lo HR lo),1,15,0.06666666666666667,shap
+bc_jackson2020,motif_tumor_high,density::tumor_area_ratio,10,15,0.6666666666666666,shap
+bc_jackson2020,motif_tumor_high,composition::Stromal cells,4,15,0.26666666666666666,shap
+bc_jackson2020,motif_tumor_high,mixing::neighbor_fraction__Tumor (CK7+)__to__Tumor (p53+ EGFR+),1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_interface_immune,point-pattern::HR+ CK7-_L_r200,4,15,0.26666666666666666,shap
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__B cells__to__Hypoxia,3,15,0.2,shap
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__Hypoxia__to__B cells,3,15,0.2,shap
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__HER2+__to__HRlow CKlow,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__HR+ CK7- Slug+__to__Hypoxia,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__HR- Ki67+__to__Basal CKlow,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__Vascular SMA+__to__HR- CK7-,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__Vascular SMA+__to__Hypoxia,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::shannon_entropy_normalized,11,15,0.7333333333333333,shap
+bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::neighbor_fraction__B cells__to__HR+ CK7- Slug+,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::neighbor_fraction__HR+ CK7- Slug+__to__Vascular SMA+,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::neighbor_fraction__Hypoxia__to__B cells,1,15,0.06666666666666667,shap
+bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::shannon_entropy_global,1,15,0.06666666666666667,shap
+hnc_wu2022,motif_cd8_clustering,mixing::neighbor_fraction__CD8 T cell__to__CD8 T cell,15,15,1.0,shap
+hnc_wu2022,motif_immune_exclusion,density::tumor_area_ratio,9,15,0.6,shap
+hnc_wu2022,motif_immune_exclusion,mixing::neighbor_fraction__CD8 T cell__to__Tumor,4,15,0.26666666666666666,shap
+hnc_wu2022,motif_immune_exclusion,mixing::neighbor_fraction__CD8 T cell__to__Naive immune cell,1,15,0.06666666666666667,shap
+hnc_wu2022,motif_immune_exclusion,mixing::neighbor_fraction__Stroma__to__CD8 T cell,1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__M2 Mac__to__CD8^+T,4,15,0.26666666666666666,shap
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__pH2AX^{+}DSB__to__CD8^+T,3,15,0.2,shap
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__CD56^+NK__to__DCs,1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__CD8^+PD1^+T_{Ex}__to__CD8^+TCF1^+T,1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__Fibroblasts__to__CD8^+GZMB^+T,1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__Treg__to__CD8^+PD1^+T_{Ex},1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__Treg__to__CD8^+T,1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,mixing::shannon_entropy_global,1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,point-pattern::CD8^+T_L_r100,1,15,0.06666666666666667,shap
+tnbc_wang2023,motif_cd8_high,point-pattern::CD8^+T_L_r20,1,15,0.06666666666666667,shap

@@ -1,0 +1,11 @@
+method,dataset,task,kind,raw_passed,protocol_passed,verdict,dataset_controls_ok,auc,std,count
+eva,bc_jackson2020,motif_apc_t_contact,spatial,True,False,fail_control_block,False,0.7154761146772071,0.0524548508768641,15
+eva,bc_jackson2020,motif_cd8_tumor_contact,spatial,True,False,fail_control_block,False,0.8037385046684916,0.0354749200004592,15
+eva,bc_jackson2020,motif_macrophage_tumor_niche,spatial,True,False,fail_control_block,False,0.6662216659183985,0.0467721829298808,15
+eva,bc_jackson2020,motif_t_tumor_mixing,spatial,True,False,fail_control_block,False,0.8117817553523962,0.0360042686828609,15
+eva,bc_jackson2020,motif_tumor_high,control,True,True,pass_control,False,0.9386329318754952,0.0157824075500238,15
+eva,bc_metabric_ali2020,motif_interface_immune,spatial,True,False,fail_control_block,False,0.7536664962849053,0.0743411911593537,15
+eva,bc_metabric_ali2020,motif_tumor_stroma_mixing,spatial,True,False,fail_control_block,False,0.8879181058046903,0.0266105725467791,15
+eva,hnc_wu2022,motif_cd8_clustering,spatial,True,False,fail_control_block,False,0.6156149777357232,0.1163583446917186,15
+eva,hnc_wu2022,motif_immune_exclusion,spatial,True,False,fail_control_block,False,0.7207567167821954,0.0508443836762534,15
+eva,tnbc_wang2023,motif_cd8_high,control,False,False,fail_control,False,0.8733088695205533,0.0234109204492203,15

@@ -1,0 +1,11 @@
+task,kind,n_regions,mean_enrichment,frac_passed,control_frac_passed,verdict,dataset,gnn_ok
+motif_apc_t_contact,spatial,180,1.1247316217260444,0.3,0.3191489361702128,fail_control_block,bc_jackson2020,False
+motif_cd8_tumor_contact,spatial,188,1.1036907357351322,0.202127659574468,0.3191489361702128,fail_control_block,bc_jackson2020,False
+motif_macrophage_tumor_niche,spatial,194,0.9195932338875462,0.0618556701030927,0.3191489361702128,fail_control_block,bc_jackson2020,False
+motif_t_tumor_mixing,spatial,187,0.9176828721106352,0.0374331550802139,0.3191489361702128,fail_control_block,bc_jackson2020,False
+motif_tumor_high,control,376,1.2779137651094237,0.3191489361702128,0.3191489361702128,fail_control,bc_jackson2020,False
+motif_cd8_high,control,766,1.3951440752669428,0.4765013054830287,0.4765013054830287,fail_control,tnbc_wang2023,False
+motif_cd8_clustering,spatial,172,1.3424297524333637,0.4593023255813953,,fail_control_block,hnc_wu2022,False
+motif_immune_exclusion,spatial,175,1.272459844765867,0.4628571428571428,,fail_control_block,hnc_wu2022,False
+motif_interface_immune,spatial,273,1.0408620412954068,0.3186813186813186,,fail_control_block,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,307,0.9883395714963068,0.009771986970684,,fail_control_block,bc_metabric_ali2020,False

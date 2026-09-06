@@ -1,0 +1,21 @@
+method,dataset,task,top1_feature,frac_top1,n_folds
+lasso,bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Macrophage__to__T cell,1.0,15
+lasso,bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__T cell,0.4666666666666667,15
+lasso,bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Macrophage__to__Stromal cells,1.0,15
+lasso,bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__T cell,0.4,15
+lasso,bc_jackson2020,motif_tumor_high,composition::Stromal cells,0.7333333333333333,15
+lasso,bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__HER2+__to__HRlow CKlow,0.4666666666666667,15
+lasso,bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::shannon_entropy_normalized,1.0,15
+lasso,hnc_wu2022,motif_cd8_clustering,mixing::neighbor_fraction__CD8 T cell__to__CD8 T cell,1.0,15
+lasso,hnc_wu2022,motif_immune_exclusion,density::tumor_area_ratio,0.7333333333333333,15
+lasso,tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__Treg__to__CD8^+PD1^+T_{Ex},0.2,15
+shap,bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Macrophage__to__T cell,0.8,15
+shap,bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__Stromal cells,0.4666666666666667,15
+shap,bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Macrophage__to__Stromal cells,0.8,15
+shap,bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__Stromal cells,0.4,15
+shap,bc_jackson2020,motif_tumor_high,density::tumor_area_ratio,0.6666666666666666,15
+shap,bc_metabric_ali2020,motif_interface_immune,point-pattern::HR+ CK7-_L_r200,0.26666666666666666,15
+shap,bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::shannon_entropy_normalized,0.7333333333333333,15
+shap,hnc_wu2022,motif_cd8_clustering,mixing::neighbor_fraction__CD8 T cell__to__CD8 T cell,1.0,15
+shap,hnc_wu2022,motif_immune_exclusion,density::tumor_area_ratio,0.6,15
+shap,tnbc_wang2023,motif_cd8_high,mixing::neighbor_fraction__M2 Mac__to__CD8^+T,0.26666666666666666,15

@@ -1,0 +1,17 @@
+dataset,task,auc,std,count,kind,embed_ok,method
+bc_jackson2020,motif_apc_t_contact,0.5622317085016134,0.049720030978292,15,spatial,False,kronos
+bc_jackson2020,motif_cd8_high,0.7616761407113928,0.0487182634291267,15,control,False,kronos
+bc_jackson2020,motif_cd8_tumor_contact,0.6211470108144224,0.0653550749159945,15,spatial,True,kronos
+bc_jackson2020,motif_macrophage_tumor_niche,0.5369840561410949,0.0765895963431521,15,spatial,False,kronos
+bc_jackson2020,motif_t_tumor_mixing,0.6441630242903946,0.0707383402199731,15,spatial,True,kronos
+bc_jackson2020,motif_tumor_high,0.8387785054036384,0.0333530655523525,15,control,False,kronos
+hnc_wu2022,motif_cd8_clustering,0.6129998796743289,0.1048060224453653,15,spatial,True,kronos
+hnc_wu2022,motif_cd8_high,0.7529176355960404,0.0423253541626377,15,control,False,kronos
+hnc_wu2022,motif_immune_exclusion,0.7063500584194474,0.0715373144214922,15,spatial,True,kronos
+hnc_wu2022,motif_tumor_high,0.8099482206682047,0.0742313401812455,15,control,False,kronos
+tnbc_wang2023,motif_cd8_high,0.9243832462365696,0.0166377325387877,15,control,True,kronos
+tnbc_wang2023,motif_tumor_high,0.847048053047643,0.0324138618495615,15,control,False,kronos
+bc_metabric_ali2020,motif_cd8_high,0.6447154698993605,0.0524431287666829,15,control,False,kronos
+bc_metabric_ali2020,motif_interface_immune,0.613082833097581,0.0352768906725112,15,spatial,True,kronos
+bc_metabric_ali2020,motif_tumor_high,0.7936601299999039,0.0333778854325706,15,control,False,kronos
+bc_metabric_ali2020,motif_tumor_stroma_mixing,0.5967312768131489,0.0759734724800668,15,spatial,False,kronos

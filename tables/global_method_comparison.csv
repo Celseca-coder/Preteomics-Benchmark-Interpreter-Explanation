@@ -1,0 +1,7 @@
+method,n_control,n_control_passed,n_spatial,n_spatial_blocked,n_spatial_scored,n_spatial_passed_protocol,n_spatial_passed_raw,control_ok,protocol_spatial,raw_spatial,protocol_control
+lasso,2,1,8,2,6,5,6,False,5/6,6/8,1/2
+shap,2,1,8,2,6,5,6,False,5/6,6/8,1/2
+kronos,2,1,8,8,0,0,5,False,0/8,5/8,1/2
+eva,2,1,8,8,0,0,8,False,0/8,8/8,1/2
+utag_cellular,2,2,8,4,4,0,1,True,0/4,1/8,2/2
+gnn_explainer,2,0,8,8,0,0,0,False,0/8,0/8,0/2

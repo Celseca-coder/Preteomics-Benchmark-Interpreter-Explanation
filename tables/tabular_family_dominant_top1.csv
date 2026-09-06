@@ -1,0 +1,81 @@
+family,method,dataset,task,top1_feature,frac_top1,n_folds
+composition,lasso,bc_jackson2020,motif_apc_t_contact,composition::Tumor (Myoepithelial),0.6666666666666666,15
+composition,lasso,bc_jackson2020,motif_cd8_tumor_contact,composition::Macrophage,0.8,15
+composition,lasso,bc_jackson2020,motif_macrophage_tumor_niche,composition::Tumor (CK lo HR lo),0.8,15
+composition,lasso,bc_jackson2020,motif_t_tumor_mixing,composition::Macrophage,0.9333333333333333,15
+composition,lasso,bc_jackson2020,motif_tumor_high,composition::Stromal cells,1.0,15
+composition,lasso,bc_metabric_ali2020,motif_interface_immune,composition::Myoepithelial,1.0,15
+composition,lasso,bc_metabric_ali2020,motif_tumor_stroma_mixing,composition::HR- CK7+,0.5333333333333333,15
+composition,lasso,hnc_wu2022,motif_cd8_clustering,composition::CD8 T cell,0.8666666666666667,15
+composition,lasso,hnc_wu2022,motif_immune_exclusion,composition::CD8 T cell,1.0,15
+composition,lasso,tnbc_wang2023,motif_cd8_high,composition::CD8^+PD1^+T_{Ex},0.7333333333333333,15
+composition,shap,bc_jackson2020,motif_apc_t_contact,composition::Stromal cells,0.6,15
+composition,shap,bc_jackson2020,motif_cd8_tumor_contact,composition::Macrophage,0.7333333333333333,15
+composition,shap,bc_jackson2020,motif_macrophage_tumor_niche,composition::Tumor (CK lo HR lo),0.8666666666666667,15
+composition,shap,bc_jackson2020,motif_t_tumor_mixing,composition::Macrophage,0.8666666666666667,15
+composition,shap,bc_jackson2020,motif_tumor_high,composition::Stromal cells,1.0,15
+composition,shap,bc_metabric_ali2020,motif_interface_immune,composition::Myoepithelial,0.9333333333333333,15
+composition,shap,bc_metabric_ali2020,motif_tumor_stroma_mixing,composition::HR- CK7+,0.4666666666666667,15
+composition,shap,hnc_wu2022,motif_cd8_clustering,composition::CD8 T cell,0.5333333333333333,15
+composition,shap,hnc_wu2022,motif_immune_exclusion,composition::CD8 T cell,1.0,15
+composition,shap,tnbc_wang2023,motif_cd8_high,composition::CD8^+T,0.5333333333333333,15
+density,lasso,bc_jackson2020,motif_apc_t_contact,density::tumor_density::Macrophage,0.4666666666666667,15
+density,lasso,bc_jackson2020,motif_cd8_tumor_contact,density::tumor_density::T cell,1.0,15
+density,lasso,bc_jackson2020,motif_macrophage_tumor_niche,density::tissue_density::Tumor (CK+ HR lo),0.4666666666666667,15
+density,lasso,bc_jackson2020,motif_t_tumor_mixing,density::tumor_density::T cell,1.0,15
+density,lasso,bc_jackson2020,motif_tumor_high,density::tumor_area_ratio,1.0,15
+density,lasso,bc_metabric_ali2020,motif_interface_immune,density::tissue_density::HR+ CK7-,0.4,15
+density,lasso,bc_metabric_ali2020,motif_tumor_stroma_mixing,density::tissue_density::HR+ CK7-,0.6,15
+density,lasso,hnc_wu2022,motif_cd8_clustering,density::tissue_density::Tumor (Proliferating),0.7333333333333333,15
+density,lasso,hnc_wu2022,motif_immune_exclusion,density::tumor_area_ratio,1.0,15
+density,lasso,tnbc_wang2023,motif_cd8_high,density::tissue_density::CD8^+PD1^+T_{Ex},0.6666666666666666,15
+density,shap,bc_jackson2020,motif_apc_t_contact,density::tumor_density::Tumor (CK7+ CK hi Ecadh hi),0.3333333333333333,15
+density,shap,bc_jackson2020,motif_cd8_tumor_contact,density::tumor_density::T cell,0.9333333333333333,15
+density,shap,bc_jackson2020,motif_macrophage_tumor_niche,density::tumor_density::Tumor (CK+ HR lo),0.4,15
+density,shap,bc_jackson2020,motif_t_tumor_mixing,density::tumor_density::T cell,0.9333333333333333,15
+density,shap,bc_jackson2020,motif_tumor_high,density::tumor_area_ratio,1.0,15
+density,shap,bc_metabric_ali2020,motif_interface_immune,density::tissue_density::HR+ CK7-,0.6,15
+density,shap,bc_metabric_ali2020,motif_tumor_stroma_mixing,density::tissue_density::HR+ CK7-,0.5333333333333333,15
+density,shap,hnc_wu2022,motif_cd8_clustering,density::tissue_density::Tumor (Proliferating),0.5333333333333333,15
+density,shap,hnc_wu2022,motif_immune_exclusion,density::tumor_area_ratio,0.8,15
+density,shap,tnbc_wang2023,motif_cd8_high,density::tissue_density::CD8^+PD1^+T_{Ex},0.6,15
+mixing,lasso,bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Macrophage__to__T cell,0.9333333333333333,15
+mixing,lasso,bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__T cell,1.0,15
+mixing,lasso,bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Macrophage__to__Stromal cells,1.0,15
+mixing,lasso,bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__T cell,0.9333333333333333,15
+mixing,lasso,bc_jackson2020,motif_tumor_high,mixing::neighbor_fraction__Stromal cells__to__Stromal cells,0.7333333333333333,15
+mixing,lasso,bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__HR- CK7-__to__Macrophages Vim+ Slug+,0.4,15
+mixing,lasso,bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::shannon_entropy_normalized,0.6666666666666666,15
+mixing,lasso,hnc_wu2022,motif_cd8_clustering,mixing::neighbor_fraction__CD8 T cell__to__CD8 T cell,1.0,15
+mixing,lasso,hnc_wu2022,motif_immune_exclusion,mixing::neighbor_fraction__CD8 T cell__to__Tumor,0.5333333333333333,15
+mixing,lasso,tnbc_wang2023,motif_cd8_high,mixing::shannon_entropy_normalized,0.4666666666666667,15
+mixing,shap,bc_jackson2020,motif_apc_t_contact,mixing::neighbor_fraction__Macrophage__to__T cell,0.8,15
+mixing,shap,bc_jackson2020,motif_cd8_tumor_contact,mixing::neighbor_fraction__T cell__to__T cell,0.8666666666666667,15
+mixing,shap,bc_jackson2020,motif_macrophage_tumor_niche,mixing::neighbor_fraction__Macrophage__to__Stromal cells,0.8666666666666667,15
+mixing,shap,bc_jackson2020,motif_t_tumor_mixing,mixing::neighbor_fraction__T cell__to__T cell,0.8,15
+mixing,shap,bc_jackson2020,motif_tumor_high,mixing::neighbor_fraction__Stromal cells__to__Stromal cells,0.8,15
+mixing,shap,bc_metabric_ali2020,motif_interface_immune,mixing::neighbor_fraction__B cells__to__Hypoxia,0.2,15
+mixing,shap,bc_metabric_ali2020,motif_tumor_stroma_mixing,mixing::shannon_entropy_global,0.5333333333333333,15
+mixing,shap,hnc_wu2022,motif_cd8_clustering,mixing::neighbor_fraction__CD8 T cell__to__CD8 T cell,1.0,15
+mixing,shap,hnc_wu2022,motif_immune_exclusion,mixing::neighbor_fraction__CD8 T cell__to__Tumor,0.3333333333333333,15
+mixing,shap,tnbc_wang2023,motif_cd8_high,mixing::shannon_entropy_normalized,0.26666666666666666,15
+point_pattern,lasso,bc_jackson2020,motif_apc_t_contact,point-pattern::T cell_L_r10,0.8666666666666667,15
+point_pattern,lasso,bc_jackson2020,motif_cd8_tumor_contact,point-pattern::Tumor (CK lo HR lo)_L_r50,0.2,15
+point_pattern,lasso,bc_jackson2020,motif_macrophage_tumor_niche,point-pattern::Tumor (CK7+)_L_r100,0.26666666666666666,15
+point_pattern,lasso,bc_jackson2020,motif_t_tumor_mixing,point-pattern::Endothelial_K_r10,0.13333333333333333,15
+point_pattern,lasso,bc_jackson2020,motif_tumor_high,point-pattern::Tumor (Basal CK)_L_r20,0.3333333333333333,15
+point_pattern,lasso,bc_metabric_ali2020,motif_interface_immune,point-pattern::HR+ CK7- Ki67+_L_r50,0.26666666666666666,15
+point_pattern,lasso,bc_metabric_ali2020,motif_tumor_stroma_mixing,point-pattern::Fibroblasts_L_r50,0.26666666666666666,15
+point_pattern,lasso,hnc_wu2022,motif_cd8_clustering,point-pattern::CD8 T cell_L_r200,1.0,15
+point_pattern,lasso,hnc_wu2022,motif_immune_exclusion,point-pattern::B cell_L_r200,0.26666666666666666,15
+point_pattern,lasso,tnbc_wang2023,motif_cd8_high,point-pattern::CD8^+PD1^+T_{Ex}_L_r10,0.4666666666666667,15
+point_pattern,shap,bc_jackson2020,motif_apc_t_contact,point-pattern::T cell_L_r10,0.5333333333333333,15
+point_pattern,shap,bc_jackson2020,motif_cd8_tumor_contact,point-pattern::Tumor (CK lo HR lo)_L_r50,0.4,15
+point_pattern,shap,bc_jackson2020,motif_macrophage_tumor_niche,point-pattern::Macrophage_L_r100,0.13333333333333333,15
+point_pattern,shap,bc_jackson2020,motif_t_tumor_mixing,point-pattern::Tumor (CK lo HR lo)_L_r50,0.4666666666666667,15
+point_pattern,shap,bc_jackson2020,motif_tumor_high,point-pattern::Endothelial_L_r50,0.2,15
+point_pattern,shap,bc_metabric_ali2020,motif_interface_immune,point-pattern::Fibroblasts_L_r20,0.13333333333333333,15
+point_pattern,shap,bc_metabric_ali2020,motif_tumor_stroma_mixing,point-pattern::Fibroblasts CD68+_L_r10,0.26666666666666666,15
+point_pattern,shap,hnc_wu2022,motif_cd8_clustering,point-pattern::CD8 T cell_L_r200,0.8,15
+point_pattern,shap,hnc_wu2022,motif_immune_exclusion,point-pattern::CD8 T cell_L_r20,0.4,15
+point_pattern,shap,tnbc_wang2023,motif_cd8_high,point-pattern::CD8^+T_L_r10,0.4,15

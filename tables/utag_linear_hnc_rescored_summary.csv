@@ -1,0 +1,13 @@
+dataset,method,task,kind,n_folds,frac_recovery_passed,mean_auc_lasso,mean_auc_ridge,frac_faithfulness,most_common_top1,recovery_ok
+hnc_wu2022,utag_linear_lasso,motif_cd8_clustering,spatial,15,0.0,0.5783743305644872,0.5446666470882477,0.5333333333333333,utag_std__Vimentin,False
+hnc_wu2022,utag_linear_shap,motif_cd8_clustering,spatial,15,0.0,0.5783743305644872,0.5446666470882477,0.5333333333333333,utag_mean__HLA-DR,False
+hnc_wu2022,utag_linear_lasso,motif_cd8_high,control,15,1.0,0.9277807437488389,0.931099099524794,1.0,utag_std__CD8,True
+hnc_wu2022,utag_linear_shap,motif_cd8_high,control,15,1.0,0.9277807437488389,0.931099099524794,1.0,utag_std__CD8,True
+hnc_wu2022,utag_linear_lasso,motif_immune_exclusion,spatial,15,0.0,0.8153573857328775,0.7781266459867631,1.0,utag_std__Vimentin,False
+hnc_wu2022,utag_linear_shap,motif_immune_exclusion,spatial,15,0.0,0.8153573857328775,0.7781266459867631,1.0,utag_std__Vimentin,False
+hnc_wu2022,utag_linear_lasso,motif_interface_immune,spatial,15,0.0,0.8163169958266505,0.7561879282277743,1.0,utag_std__Vimentin,False
+hnc_wu2022,utag_linear_shap,motif_interface_immune,spatial,15,0.0,0.8163169958266505,0.7561879282277743,1.0,utag_std__Vimentin,False
+hnc_wu2022,utag_linear_lasso,motif_tumor_high,control,15,0.9333333333333333,0.9333884078623969,0.9315944737882272,1.0,utag_mean__CD45,True
+hnc_wu2022,utag_linear_shap,motif_tumor_high,control,15,1.0,0.9333884078623969,0.9315944737882272,1.0,utag_mean__CD45,True
+hnc_wu2022,utag_linear_lasso,motif_tumor_stroma_mixing,spatial,15,0.0,0.8319360247595544,0.8294795708429153,1.0,utag_std__Vimentin,False
+hnc_wu2022,utag_linear_shap,motif_tumor_stroma_mixing,spatial,15,0.0,0.8319360247595544,0.8294795708429153,1.0,utag_std__Vimentin,False
