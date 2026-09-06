@@ -14,7 +14,7 @@ HNC_DIR = ROOT / "results" / "pseudo_label_explanations"
 sys.path.insert(0, str(ROOT))
 
 from benchmark.motifs.panel import load_selected_panel  # noqa: E402
-from benchmark.motifs.recovery import UTAG_RULES, rank_recovery  # noqa: E402
+from benchmark.motifs.recovery import RULES, UTAG_RULES, rank_recovery  # noqa: E402
 
 OUT.mkdir(parents=True, exist_ok=True)
 CONTROLS = ("motif_tumor_high", "motif_cd8_high")
@@ -299,7 +299,43 @@ def summarize_utag_rescore(rec_df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def export_recovery_regex() -> None:
+    rows = []
+    wide = []
+    for task, rule in RULES.items():
+        for i, pat in enumerate(rule.hit, 1):
+            rows.append(dict(
+                task=task, kind=rule.kind, role="hit", pattern_index=i, pattern=pat,
+                pass_note="top-5 feature name must match (case-insensitive after normalize)",
+            ))
+        if not rule.miss_as_top:
+            rows.append(dict(
+                task=task, kind=rule.kind, role="miss_as_top", pattern_index=0, pattern="",
+                pass_note="no abundance-leak Top-1 rule",
+            ))
+        for i, pat in enumerate(rule.miss_as_top, 1):
+            rows.append(dict(
+                task=task, kind=rule.kind, role="miss_as_top", pattern_index=i, pattern=pat,
+                pass_note="if Top-1 matches, spatial fold fails even if hit later in top-5",
+            ))
+        wide.append(dict(
+            task=task,
+            kind=rule.kind,
+            hit_patterns=" | ".join(rule.hit),
+            miss_as_top_patterns=" | ".join(rule.miss_as_top) if rule.miss_as_top else "(none)",
+            fold_pass_rule=(
+                "top-5 hits any hit-pattern"
+                if rule.kind == "control"
+                else "top-5 hits any hit-pattern AND Top-1 does not match miss_as_top"
+            ),
+            task_pass_rule=">=50% of 15 folds pass",
+        ))
+    pd.DataFrame(rows).to_csv(OUT / "tabular_recovery_regex.csv", index=False)
+    pd.DataFrame(wide).to_csv(OUT / "tabular_recovery_regex_by_task.csv", index=False)
+
+
 def main() -> None:
+    export_recovery_regex()
     panel = load_panel()
     panel[[
         "motif_id", "source_dataset", "source_dataset_name", "task_type", "panel",

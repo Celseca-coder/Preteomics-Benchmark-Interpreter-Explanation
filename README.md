@@ -134,6 +134,7 @@
 | [markdown/07_clinical_global.md](markdown/07_clinical_global.md) | 真实临床终点上的 Global Lasso / SHAP |
 | [markdown/08_tabular_families.md](markdown/08_tabular_families.md) | 四族拆开：composition / density / mixing / point-pattern |
 | [markdown/09_tabular_pairs.md](markdown/09_tabular_pairs.md) | 六对两两组合 |
+| [markdown/10_recovery_regex.md](markdown/10_recovery_regex.md) | 各 motif 回收通过的 hit / miss 正则 |
 | `tables/` | 上述结论对应的 CSV |
 
 源数据主要来自：

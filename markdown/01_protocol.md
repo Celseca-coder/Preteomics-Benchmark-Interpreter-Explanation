@@ -29,6 +29,8 @@ Lasso 和 SHAP **共用特征表，但独立门控**：
 
 四族也曾 **单独** 各跑一次（各自的 `--output-dir`，避免读到联合 `tabular/` 缓存）。那是把每一族当作自己的解释器，不能用联合表的 Top-1 反推。结果见 [08_tabular_families.md](08_tabular_families.md)。expression 仍不在 `--mode tabular` 的 featurizer 里。
 
+每条 motif「top-5 命中什么才算通过」的正则全文见 [10_recovery_regex.md](10_recovery_regex.md)，表：`tables/tabular_recovery_regex.csv`。
+
 ## 回收规则在问什么
 
 Control（`tumor_high` / `cd8_high`）要求 top-5 里出现对应组成或密度列。

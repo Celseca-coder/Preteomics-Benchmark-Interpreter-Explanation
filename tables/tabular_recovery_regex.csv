@@ -1,0 +1,56 @@
+task,kind,role,pattern_index,pattern,pass_note
+motif_tumor_high,control,hit,1,composition::.*tumor(?!_stroma),top-5 feature name must match (case-insensitive after normalize)
+motif_tumor_high,control,hit,2,tissue_density::.*tumor(?!_stroma),top-5 feature name must match (case-insensitive after normalize)
+motif_tumor_high,control,hit,3,tumor_area_ratio,top-5 feature name must match (case-insensitive after normalize)
+motif_tumor_high,control,hit,4,(^|::)tumor$,top-5 feature name must match (case-insensitive after normalize)
+motif_tumor_high,control,miss_as_top,0,,no abundance-leak Top-1 rule
+motif_cd8_high,control,hit,1,composition::.*(cd8|t cells?),top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_high,control,hit,2,tissue_density::.*(cd8|t cells?),top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_high,control,hit,3,(^|::)(cd8 t cells?|t cells?)$,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_high,control,miss_as_top,0,,no abundance-leak Top-1 rule
+motif_cd8_clustering,spatial,hit,1,cd8.*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_clustering,spatial,hit,2,cd8.*ripley,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_clustering,spatial,hit,3,cd8.*cluster,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_clustering,spatial,hit,4,mixing::neighbor_fraction__.*(cd8|t cell).*__to__.*(cd8|t cell),top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_clustering,spatial,hit,5,mixing::same_type_neighbor_fraction,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_clustering,spatial,hit,6,mixing::local_mixing,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_clustering,spatial,miss_as_top,1,composition::.*cd8,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_cd8_clustering,spatial,miss_as_top,2,tissue_density::.*cd8,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_cd8_clustering,spatial,miss_as_top,3,frac__cd8,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_cd8_clustering,spatial,miss_as_top,4,(^|::)cd8 t cell$,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_tumor_stroma_mixing,spatial,hit,1,stroma.*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_tumor_stroma_mixing,spatial,hit,2,tumor.*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_tumor_stroma_mixing,spatial,hit,3,mixing,top-5 feature name must match (case-insensitive after normalize)
+motif_tumor_stroma_mixing,spatial,miss_as_top,1,composition::.*(tumor|stroma)$,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_tumor_stroma_mixing,spatial,miss_as_top,2,tissue_density::.*(tumor|stroma)$,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_tumor_stroma_mixing,spatial,miss_as_top,3,(^|::)(tumor|stroma)$,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_interface_immune,spatial,hit,1,tumor_density::(cd8|cd4|b cell|macrophage|immune),top-5 feature name must match (case-insensitive after normalize)
+motif_interface_immune,spatial,hit,2,interface,top-5 feature name must match (case-insensitive after normalize)
+motif_interface_immune,spatial,hit,3,(cd8|cd4|b cell).*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_interface_immune,spatial,miss_as_top,1,composition::.*(cd8|cd4|b cell|macrophage|immune),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_interface_immune,spatial,miss_as_top,2,tissue_density::.*(cd8|cd4|b cell|macrophage),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_immune_exclusion,spatial,hit,1,tumor_density::cd8,top-5 feature name must match (case-insensitive after normalize)
+motif_immune_exclusion,spatial,hit,2,tissue_density::cd8,top-5 feature name must match (case-insensitive after normalize)
+motif_immune_exclusion,spatial,hit,3,cd8.*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_immune_exclusion,spatial,miss_as_top,1,composition::.*cd8,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_immune_exclusion,spatial,miss_as_top,2,frac__cd8,"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_t_tumor_mixing,spatial,hit,1,(t cells?|cd8).*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_t_tumor_mixing,spatial,hit,2,tumor.*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_t_tumor_mixing,spatial,hit,3,mixing,top-5 feature name must match (case-insensitive after normalize)
+motif_t_tumor_mixing,spatial,miss_as_top,1,composition::.*(tumor|t cells?|cd8),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_t_tumor_mixing,spatial,miss_as_top,2,tissue_density::.*(tumor|t cells?|cd8),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_cd8_tumor_contact,spatial,hit,1,(cd8|t cells?).*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_tumor_contact,spatial,hit,2,tumor_density::(cd8|t cells?),top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_tumor_contact,spatial,hit,3,mixing,top-5 feature name must match (case-insensitive after normalize)
+motif_cd8_tumor_contact,spatial,miss_as_top,1,composition::.*(tumor|cd8|t cells?),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_cd8_tumor_contact,spatial,miss_as_top,2,tissue_density::.*(tumor|cd8|t cells?),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_macrophage_tumor_niche,spatial,hit,1,macrophage.*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_macrophage_tumor_niche,spatial,hit,2,tumor.*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_macrophage_tumor_niche,spatial,hit,3,mixing,top-5 feature name must match (case-insensitive after normalize)
+motif_macrophage_tumor_niche,spatial,miss_as_top,1,composition::.*(tumor|macrophage),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_macrophage_tumor_niche,spatial,miss_as_top,2,tissue_density::.*(tumor|macrophage),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_apc_t_contact,spatial,hit,1,(apc|dendritic|macrophage).*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_apc_t_contact,spatial,hit,2,(t cells?|cd8).*[_ ][kl]_r,top-5 feature name must match (case-insensitive after normalize)
+motif_apc_t_contact,spatial,hit,3,mixing,top-5 feature name must match (case-insensitive after normalize)
+motif_apc_t_contact,spatial,miss_as_top,1,composition::.*(apc|dendritic|macrophage|t cells?|cd8),"if Top-1 matches, spatial fold fails even if hit later in top-5"
+motif_apc_t_contact,spatial,miss_as_top,2,tissue_density::.*(apc|dendritic|macrophage|t cells?|cd8),"if Top-1 matches, spatial fold fails even if hit later in top-5"

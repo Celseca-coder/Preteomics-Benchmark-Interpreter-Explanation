@@ -36,6 +36,8 @@
 | `tabular_pair_fold_summary.csv` | 两两全部任务（含匹配 control） |
 | `tabular_pair_dominant_top1.csv` | 两两每个选定任务最常见 Top-1 |
 | `tabular_pair_auc_compare.csv` | 两两 AUC / 回收率对照联合表 |
+| `tabular_recovery_regex.csv` | 每条 motif 的 hit / miss_as_top 正则（一行一条） |
+| `tabular_recovery_regex_by_task.csv` | 按任务汇总的回收正则与通过条件 |
 
 ## 临床终点（无伪标签 ground truth）
 
