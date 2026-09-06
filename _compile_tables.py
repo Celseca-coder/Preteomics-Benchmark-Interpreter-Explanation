@@ -334,6 +334,104 @@ def export_recovery_regex() -> None:
     pd.DataFrame(wide).to_csv(OUT / "tabular_recovery_regex_by_task.csv", index=False)
 
 
+def compile_mil_noisy_combos(panel: pd.DataFrame) -> pd.DataFrame:
+    """Score AttnMIL noisy feature-group combos (attention + instance explainers)."""
+    combo_dirs = {
+        "composition": PANEL_DIR / "mil_noisy_composition",
+        "mixing": PANEL_DIR / "mil_noisy_mixing",
+        "celltype_density": PANEL_DIR / "mil_noisy_celltype_density",
+        "composition_mixing": PANEL_DIR / "mil_noisy_composition_mixing",
+        "composition_celltype_density": PANEL_DIR / "mil_noisy_composition_celltype_density",
+        "mixing_celltype_density": PANEL_DIR / "mil_noisy_mixing_celltype_density",
+    }
+    fold_frames = []
+    verdict_frames = []
+    summaries = []
+    metric_rows = []
+    selected = selected_pairs(panel)
+
+    for combo, path in combo_dirs.items():
+        summary_path = path / "summary.csv"
+        if not summary_path.is_file():
+            print(f"WARN: missing {summary_path}; skip MIL combo {combo}")
+            continue
+        summary = pd.read_csv(summary_path)
+        summary = summary.copy()
+        summary["combo"] = combo
+        fold_frames.append(summary)
+        for explainer, sub in summary.groupby("explainer"):
+            sub = sub.copy()
+            mil_ok = []
+            for r in sub.itertuples(index=False):
+                if r.kind == "control":
+                    mil_ok.append(str(r.verdict) == "pass_control")
+                else:
+                    mil_ok.append(
+                        float(r.frac_loc_passed) >= 0.5 and float(r.frac_faith_passed) >= 0.5
+                    )
+            score_in = sub.rename(columns={"verdict": "native_verdict"}).copy()
+            score_in["mil_ok"] = mil_ok
+            keep = [
+                "dataset", "task", "mil_ok", "mean_auc", "frac_auc_passed",
+                "frac_loc_passed", "frac_faith_passed", "mean_loc_enrichment",
+                "mean_delta_lerf_morf", "native_verdict", "loc_verdict", "faith_verdict",
+            ]
+            keep = [c for c in keep if c in score_in.columns]
+            tasks, summ = score_method(
+                f"mil_{combo}_{explainer}", score_in[keep], "mil_ok", panel
+            )
+            tasks["combo"] = combo
+            tasks["explainer"] = explainer
+            summ["combo"] = combo
+            summ["explainer"] = explainer
+            verdict_frames.append(tasks)
+            summaries.append(summ)
+            for dataset, task in sorted(selected):
+                row = sub[(sub["dataset"].astype(str) == dataset) & (sub["task"] == task)]
+                if row.empty:
+                    continue
+                r = row.iloc[0]
+                metric_rows.append(dict(
+                    combo=combo, explainer=explainer, dataset=dataset, task=task,
+                    kind=kind_of(task), mean_auc=r.mean_auc,
+                    frac_auc_passed=r.frac_auc_passed,
+                    frac_loc_passed=r.frac_loc_passed,
+                    frac_faith_passed=r.frac_faith_passed,
+                    mean_loc_enrichment=r.mean_loc_enrichment,
+                    mean_delta_lerf_morf=r.mean_delta_lerf_morf,
+                    native_verdict=r.verdict,
+                ))
+
+    if not fold_frames:
+        return pd.DataFrame()
+
+    folds = pd.concat(fold_frames, ignore_index=True)
+    verdicts = pd.concat(verdict_frames, ignore_index=True)
+    comparison = pd.DataFrame(summaries)
+    folds.to_csv(OUT / "mil_noisy_combo_fold_summary.csv", index=False)
+    verdicts.to_csv(OUT / "mil_noisy_combo_selected_task_verdicts.csv", index=False)
+    comparison.to_csv(OUT / "mil_noisy_combo_method_comparison.csv", index=False)
+    pd.DataFrame(metric_rows).to_csv(OUT / "mil_noisy_combo_selected_metrics.csv", index=False)
+
+    att = verdicts[verdicts["explainer"] == "attention"]
+    wide_rows = []
+    for dataset, task in sorted(selected):
+        row = dict(dataset=dataset, task=task, kind=kind_of(task))
+        for combo in combo_dirs:
+            sub = att[
+                (att.combo == combo) & (att.dataset == dataset) & (att.task == task)
+            ]
+            if sub.empty:
+                row[f"{combo}_raw"] = "missing"
+                row[f"{combo}_verdict"] = "missing"
+            else:
+                row[f"{combo}_raw"] = "pass" if bool(sub.raw_passed.iloc[0]) else "fail"
+                row[f"{combo}_verdict"] = sub.verdict.iloc[0]
+        wide_rows.append(row)
+    pd.DataFrame(wide_rows).to_csv(OUT / "mil_noisy_combo_attention_wide.csv", index=False)
+    return comparison
+
+
 def main() -> None:
     export_recovery_regex()
     panel = load_panel()
@@ -496,6 +594,7 @@ def main() -> None:
 
     family_cmp, _ = compile_tabular_families(panel)
     pair_cmp, _ = compile_tabular_pairs(panel)
+    mil_cmp = compile_mil_noisy_combos(panel)
 
     print("Wrote", OUT)
     print(pd.DataFrame(summaries).to_string(index=False))
@@ -503,6 +602,13 @@ def main() -> None:
     print(family_cmp.to_string(index=False))
     print("\nPairwise Lasso/SHAP")
     print(pair_cmp.to_string(index=False))
+    if mil_cmp is not None and not mil_cmp.empty:
+        print("\nMIL noisy combos (attention)")
+        print(
+            mil_cmp[mil_cmp["explainer"] == "attention"][
+                ["combo", "protocol_control", "raw_spatial", "protocol_spatial"]
+            ].to_string(index=False)
+        )
 
 
 if __name__ == "__main__":

@@ -119,6 +119,21 @@
 
 单族 / 两两不是把联合表拆列，而是各自重跑。明细：`tables/global_method_comparison.csv`，`tables/tabular_family_method_comparison.csv`，`tables/tabular_pair_method_comparison.csv`。说明见 [08](markdown/08_tabular_families.md)、[09](markdown/09_tabular_pairs.md)。
 
+### MIL noisy 特征组合（Attention；window 定位协议）
+
+对应 `logs/mil_interpreter_panel_noisy_all_combos.nohup.log` 六组已跑完。协议是定位+忠实性，不是列名正则。明细：[11_mil_noisy_combos.md](markdown/11_mil_noisy_combos.md)。
+
+| 特征组合 | 选定 control | 空间 raw | 空间 protocol |
+|---|---|---|---|
+| composition | 2/2 | 2/8 | 2/6 |
+| mixing | 2/2 | 0/8 | 0/4 |
+| celltype_density | 2/2 | 2/8 | 0/4 |
+| composition + mixing | 2/2 | 1/8 | 0/4 |
+| composition + celltype_density | 1/2 | 2/8 | 0/4 |
+| mixing + celltype_density | 2/2 | 1/8 | 0/4 |
+
+Attention 最强仍是 composition（仅 HNC 两条空间 protocol 过）。同设定下 IG 在 composition 上可达 5/6，说明 attention 权重常对不齐几何证据。
+
 ---
 
 ## 文件索引
@@ -135,6 +150,7 @@
 | [markdown/08_tabular_families.md](markdown/08_tabular_families.md) | 四族拆开：composition / density / mixing / point-pattern |
 | [markdown/09_tabular_pairs.md](markdown/09_tabular_pairs.md) | 六对两两组合 |
 | [markdown/10_recovery_regex.md](markdown/10_recovery_regex.md) | 各 motif 回收通过的 hit / miss 正则 |
+| [markdown/11_mil_noisy_combos.md](markdown/11_mil_noisy_combos.md) | MIL noisy 六组特征组合（Attention / IG 等） |
 | `tables/` | 上述结论对应的 CSV |
 
 源数据主要来自：

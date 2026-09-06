@@ -38,6 +38,11 @@
 | `tabular_pair_auc_compare.csv` | 两两 AUC / 回收率对照联合表 |
 | `tabular_recovery_regex.csv` | 每条 motif 的 hit / miss_as_top 正则（一行一条） |
 | `tabular_recovery_regex_by_task.csv` | 按任务汇总的回收正则与通过条件 |
+| `mil_noisy_combo_method_comparison.csv` | MIL noisy 六组 × 解释器总分 |
+| `mil_noisy_combo_attention_wide.csv` | Attention：选定任务 × 特征组合 |
+| `mil_noisy_combo_selected_metrics.csv` | 选定任务 AUC / 定位 / 忠实性 |
+| `mil_noisy_combo_selected_task_verdicts.csv` | 全部解释器选定任务 raw / protocol |
+| `mil_noisy_combo_fold_summary.csv` | 六组原生 summary 合并 |
 
 ## 临床终点（无伪标签 ground truth）
 
