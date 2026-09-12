@@ -38,6 +38,10 @@
 | `tabular_pair_auc_compare.csv` | 两两 AUC / 回收率对照联合表 |
 | `tabular_recovery_regex.csv` | 每条 motif 的 hit / miss_as_top 正则（一行一条） |
 | `tabular_recovery_regex_by_task.csv` | 按任务汇总的回收正则与通过条件 |
+| `tabular_topk_precision_folds.csv` | 每 fold 的 hit@1 / P@k / MRR / recall@k |
+| `tabular_topk_precision_by_task.csv` | 按 (特征集 × 任务 × 解释器) 平均，含 `|H|` |
+| `tabular_topk_precision_method_summary.csv` | 10 任务 / 空间 / control 平均 |
+| `tabular_topk_hit_candidates.csv` | 每个 (特征集 × 任务) 的词表大小与 `|H|` |
 | `mil_noisy_combo_method_comparison.csv` | MIL noisy 六组 × 解释器总分 |
 | `mil_noisy_combo_attention_wide.csv` | Attention：选定任务 × 特征组合 |
 | `mil_noisy_combo_selected_metrics.csv` | 选定任务 AUC / 定位 / 忠实性 |

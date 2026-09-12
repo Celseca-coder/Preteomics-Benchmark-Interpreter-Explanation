@@ -12,7 +12,7 @@
 
 Faithfulness 也挂在 Ridge 上：打乱 SHAP top-5 后的 AUC 下降，应大于打乱随机 5 个特征。
 
-脚本与 Lasso 相同（`--mode tabular`），只是 `shap_passed` 单独计数。同一跑里可以换 `--feature-sources`：四族联合、单族、两两组合各有目录；SHAP 与 Lasso 共用特征表。
+脚本与 Lasso 相同（`--mode tabular`），只是 `shap_passed` 单独计数。同一跑里可以换 `--feature-sources`：四族联合、单族、两两组合各有目录；SHAP 与 Lasso 共用特征表。top-k precision / MRR / `|H|` 见 [12_tabular_topk_precision.md](12_tabular_topk_precision.md)；与 Lasso 几乎重合。
 
 ## 选定任务结果（四族联合）
 

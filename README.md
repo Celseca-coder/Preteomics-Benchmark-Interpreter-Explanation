@@ -31,6 +31,7 @@
 6. **GNN Explainer 目前不能当作已验证的 Global 解释器。** 导出用的是每个任务 seed0/fold0 一个 checkpoint。两个选定 control 的 region 通过率都 &lt; 0.50（TNBC `cd8_high` 最接近，0.477）。空间任务最高也只有 HNC 的 ~0.46。节点 importance 没有稳定富集到 motif 对应细胞类型。
 7. **四族拆开跑之后，联合表的 1/2 control 和 5/6 空间可以对上，但没有单族通过完整协议。** composition / density 单独时选定 control 是 **2/2**（TNBC `cd8_high` 回到 CD8 组成或组织密度）；空间 raw 分别是 0/8 和 2/8（density 的两条通过要按规则打折）。mixing / point-pattern 空间 raw 都是 6/8，但 control 0/2，协议 0/8。联合 L1 有 mixing 时不会回到 `composition::CD8`。明细见 [markdown/08_tabular_families.md](markdown/08_tabular_families.md)。
 8. **两两组合里，联合四族 ≈ composition + mixing（同为 1/2 + 5/6）。** 真正同时拿到选定 control 2/2 和空间协议分的是 **composition + point-pattern（5/6）** 和 **density + point-pattern（6/8）**；后者 exclusion 仍是 `tumor_area_ratio` 规则漏洞。mixing 一进表，TNBC `cd8_high` 名字就不稳。明细见 [markdown/09_tabular_pairs.md](markdown/09_tabular_pairs.md)。
+9. **协议 pass 只问 top-5 有没有命中；top-k precision 更细，但必须带 `|H|`。** 10 任务平均上 density+mixing 的 SHAP hit@1 / MRR 最高（0.69 / 0.70），但 mixing 相关组合被裸 `mixing` 正则抬高（Jackson `|H|=407`）。诚实对照是 HNC `cd8_clustering`：mixing `|H|=9`、P@3=0.36；point-pattern `|H|=10`、P@3=1.00。composition 只在 control 上有合格列。明细见 [markdown/12_tabular_topk_precision.md](markdown/12_tabular_topk_precision.md)。
 
 ---
 
@@ -151,6 +152,7 @@ Attention 最强仍是 composition（仅 HNC 两条空间 protocol 过）。同�
 | [markdown/09_tabular_pairs.md](markdown/09_tabular_pairs.md) | 六对两两组合 |
 | [markdown/10_recovery_regex.md](markdown/10_recovery_regex.md) | 各 motif 回收通过的 hit / miss 正则 |
 | [markdown/11_mil_noisy_combos.md](markdown/11_mil_noisy_combos.md) | MIL noisy 六组特征组合（Attention / IG 等） |
+| [markdown/12_tabular_topk_precision.md](markdown/12_tabular_topk_precision.md) | Globals top-1 / top-3 precision、MRR、`|H|`、recall@k（clean tabular，不重跑） |
 | `tables/` | 上述结论对应的 CSV |
 
 源数据主要来自：

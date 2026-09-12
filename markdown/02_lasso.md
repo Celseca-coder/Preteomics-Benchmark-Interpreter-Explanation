@@ -9,6 +9,7 @@ Lasso 在这里不是事后解释器，而是 **带 L1 的 Logistic Regression**
 - 特征：composition + density + mixing + type-specific point pattern
 - 通过：该 fold 的 top-5 命中预期模式；空间任务还要求 Top-1 不是丰度泄漏
 - 任务级通过：≥50% fold 通过
+- top-k 细指标（hit@1 / P@3 / MRR / `|H|` / recall@k）见 [12_tabular_topk_precision.md](12_tabular_topk_precision.md)，不改 pass/fail
 
 临床终点上的 Stability Lasso（真实 OS/response 等）见 [07_clinical_global.md](07_clinical_global.md)。本文只讨论 motif 伪标签验证。
 

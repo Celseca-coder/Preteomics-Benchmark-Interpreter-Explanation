@@ -159,3 +159,5 @@ Top-1 若是 `composition::CD8 T cell` → 即使后面有 mixing 也 **fail**�
 - `lasso_hit` / `shap_hit`：top-5 中命中 `hit` 的特征名，`;` 拼接  
 - `lasso_top1`：是否踩中 `miss_as_top` 看 `shap_miss_as_top1` 等列（Lasso 的 miss 体现在 `lasso_passed=False`）  
 - `lasso_passed` / `shap_passed`：上表逻辑的布尔结果
+
+同一套正则上的 hit@1 / P@k / MRR / `|H|` / recall@k 见 [12_tabular_topk_precision.md](12_tabular_topk_precision.md)。宽 `mixing` 正则会让 Jackson / METABRIC stroma 的 `|H|` 涨到整张 mixing 词表。

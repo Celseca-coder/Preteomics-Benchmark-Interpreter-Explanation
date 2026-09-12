@@ -11,7 +11,7 @@
 
 脚本：`scripts/run_tabular_family_combos.sh`（`MODE=pairs`）。阈值、15 fold、`--rules tabular` 与单族 / 联合表相同。
 
-表：`tables/tabular_pair_method_comparison.csv`，`tables/tabular_pair_selected_task_verdicts.csv`，`tables/tabular_pair_dominant_top1.csv`，`tables/tabular_pair_auc_compare.csv`。
+表：`tables/tabular_pair_method_comparison.csv`，`tables/tabular_pair_selected_task_verdicts.csv`，`tables/tabular_pair_dominant_top1.csv`，`tables/tabular_pair_auc_compare.csv`。top-k 细指标见 [12_tabular_topk_precision.md](12_tabular_topk_precision.md)。
 
 下面分数默认用 **Lasso**。`composition + mixing` 上 SHAP 与 Lasso 第一次在选定 control 上分叉，文末单独写。
 

@@ -9,7 +9,7 @@
 
 脚本、阈值、15 fold、`--rules tabular` 与联合跑相同。每个目录有自己的 `tabular_features.csv`，不会读到联合缓存。
 
-表：`tables/tabular_family_method_comparison.csv`，`tables/tabular_family_selected_task_verdicts.csv`，`tables/tabular_family_dominant_top1.csv`，`tables/tabular_family_auc_compare.csv`。
+表：`tables/tabular_family_method_comparison.csv`，`tables/tabular_family_selected_task_verdicts.csv`，`tables/tabular_family_dominant_top1.csv`，`tables/tabular_family_auc_compare.csv`。top-k 细指标见 [12_tabular_topk_precision.md](12_tabular_topk_precision.md)。
 
 Lasso 与 SHAP 在这四族上的任务级 pass/fail **完全一致**。下面分数用 Lasso；SHAP 只在 Top-1 列名不同时另写。
 
