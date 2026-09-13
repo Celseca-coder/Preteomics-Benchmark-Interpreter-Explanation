@@ -26,20 +26,20 @@ MIL **不**用特征名正则。每个 fold 要过三关：
 
 任务级：≥50% fold 过。control 任务要求 AUC+定位+忠实性都过（`pass_control`）。  
 空间 raw：定位与忠实性都 ≥50% fold。  
-空间 protocol：仍用 **同数据集匹配** `tumor_high`+`cd8_high` 都 `pass_control` 才计分（与 Global 文档同一套门；分母可变）。
+空间 protocol：仍用 **同数据集匹配** `tumor_high`+`cd8_high` 都 `pass_control` 才计分（与 Global 文档同一套门；`protocol_spatial` 分母可变）。`raw_overall` / `protocol_overall` 分母固定为 10，被挡空间计失败。
 
 选定 control 仍是 Jackson `tumor_high`、TNBC `cd8_high`。
 
 ## Attention 总分（主结果）
 
-| 特征组合 | 选定 control | 空间 raw | 空间 protocol | 一句话 |
-|---|---|---|---|---|
-| composition | **2/2** | **2/8** | **2/6** | 仅 HNC `cd8_clustering` / `immune_exclusion`；METABRIC 挡 |
-| mixing | 2/2 | 0/8 | 0/4 | HNC `tumor_high` 定位失败 → HNC 空间全挡；空间 raw 也无双过 |
-| celltype_density | 2/2 | 2/8 | 0/4 | HNC 两条 raw 过，但 HNC `tumor_high` 忠实性不够 → 协议挡 |
-| composition + mixing | 2/2 | 1/8 | 0/4 | 仅 exclusion raw；HNC/METABRIC 匹配 control 不齐 |
-| composition + celltype_density | **1/2** | 2/8 | 0/4 | TNBC `cd8_high` 定位 0.47 不过；HNC raw 过仍被挡 |
-| mixing + celltype_density | 2/2 | 1/8 | 0/4 | 同 composition+mixing 量级 |
+| 特征组合 | 选定 control | 空间 raw | 空间 protocol | overall raw | overall protocol | 一句话 |
+|---|---|---|---|---|---|---|
+| composition | **2/2** | **2/8** | **2/6** | **4/10** | **4/10** | 仅 HNC `cd8_clustering` / `immune_exclusion`；METABRIC 挡 |
+| mixing | 2/2 | 0/8 | 0/4 | 2/10 | 2/10 | HNC `tumor_high` 定位失败 → HNC 空间全挡；空间 raw 也无双过 |
+| celltype_density | 2/2 | 2/8 | 0/4 | 4/10 | 2/10 | HNC 两条 raw 过，但 HNC `tumor_high` 忠实性不够 → 协议挡 |
+| composition + mixing | 2/2 | 1/8 | 0/4 | 3/10 | 2/10 | 仅 exclusion raw；HNC/METABRIC 匹配 control 不齐 |
+| composition + celltype_density | **1/2** | 2/8 | 0/4 | 3/10 | 1/10 | TNBC `cd8_high` 定位 0.47 不过；HNC raw 过仍被挡 |
+| mixing + celltype_density | 2/2 | 1/8 | 0/4 | 3/10 | 2/10 | 同 composition+mixing 量级 |
 
 **没有一组 Attention 在空间 protocol 上超过 composition 的 2/6。** Jackson 四条空间在 Attention 下几乎全是「有 AUC / 有时 faithful，但定位不过」或反过来。
 
@@ -91,7 +91,7 @@ MIL **不**用特征名正则。每个 fold 要过三关：
 | composition + dens | 0/4 | **5/6** | **5/6** | 2/6 | 0/8 |
 | mixing + dens | 0/4 | 2/6 | 2/6 | — | 0/8 |
 
-（上表 protocol 分母随匹配 control 变化；完整数字见 `mil_noisy_combo_method_comparison.csv`。）
+（上表 `protocol_spatial` 分母随匹配 control 变化；`raw_overall` / `protocol_overall` 分母固定 10。完整数字见 `mil_noisy_combo_method_comparison.csv`。）
 
 要点：
 

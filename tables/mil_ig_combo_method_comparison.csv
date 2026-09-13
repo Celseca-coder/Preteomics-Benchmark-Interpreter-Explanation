@@ -1,0 +1,4 @@
+method,n_control,n_control_passed,n_spatial,n_spatial_blocked,n_spatial_scored,n_spatial_passed_protocol,n_spatial_passed_raw,control_ok,protocol_spatial,raw_spatial,protocol_control,raw_overall,protocol_overall,combo,explainer
+mil_composition_mixing_ig,2,0,8,8,0,0,2,False,0/8,2/8,0/2,2/10,0/10,composition_mixing,ig
+mil_mixing_ig,2,0,8,8,0,0,2,False,0/8,2/8,0/2,2/10,0/10,mixing,ig
+mil_mixing_celltype_density_ig,2,0,8,8,0,0,2,False,0/8,2/8,0/2,2/10,0/10,mixing_celltype_density,ig

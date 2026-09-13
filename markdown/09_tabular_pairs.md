@@ -17,15 +17,15 @@
 
 ## 方法总分
 
-| 组合 | 选定 control | 空间 raw | 空间 protocol | 一句话 |
-|---|---|---|---|---|
-| 联合四族（对照） | 1/2 | 6/8 | 5/6 | mixing 抢走 TNBC CD8 |
-| composition+density | **2/2** | 2/8 | 2/8 | 几乎等于 density 单族 |
-| composition+mixing | 1/2 | 6/8 | 5/6 | **复现联合表** |
-| density+mixing | 1/2 | 6/8 | **0/8** | tumor 过、CD8 不过 → 全数据集挡住 |
-| composition+point-pattern | **2/2** | 5/8 | **5/6** | 首个「control 齐 + 空间有协议分」且不含 mixing |
-| density+point-pattern | **2/2** | 6/8 | **6/8** | 协议分最高；exclusion 仍是面积比漏洞 |
-| mixing+point-pattern | 0/2 | 6/8 | 0/8 | 等于 mixing 单族：空间有、control 无 |
+| 组合 | 选定 control | 空间 raw | 空间 protocol | overall raw | overall protocol | 一句话 |
+|---|---|---|---|---|---|---|
+| 联合四族（对照） | 1/2 | 6/8 | 5/6 | 7/10 | 6/10 | mixing 抢走 TNBC CD8 |
+| composition+density | **2/2** | 2/8 | 2/8 | 4/10 | 4/10 | 几乎等于 density 单族 |
+| composition+mixing | 1/2 | 6/8 | 5/6 | 7/10 | 6/10 | **复现联合表** |
+| density+mixing | 1/2 | 6/8 | **0/8** | 7/10 | 1/10 | tumor 过、CD8 不过 → 全数据集挡住；raw overall 被空间 raw 抬高 |
+| composition+point-pattern | **2/2** | 5/8 | **5/6** | 7/10 | 7/10 | 首个「control 齐 + 空间有协议分」且不含 mixing |
+| density+point-pattern | **2/2** | 6/8 | **6/8** | **8/10** | **8/10** | 协议 overall 最高；exclusion 仍是面积比漏洞 |
+| mixing+point-pattern | 0/2 | 6/8 | 0/8 | 6/10 | 0/10 | 等于 mixing 单族：空间有、control 无 |
 
 ## 选定任务：Lasso raw
 

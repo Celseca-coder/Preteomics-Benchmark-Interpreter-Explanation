@@ -17,15 +17,15 @@ Lasso 与 SHAP 在这四族上的任务级 pass/fail **完全一致**。下面�
 
 和联合表一样：选定 control 是 Jackson `tumor_high` + TNBC `cd8_high`。空间 protocol 仍看同数据集匹配 control。
 
-| 族 | 选定 control | 空间 raw | 空间 protocol | 一句话 |
-|---|---|---|---|---|
-| 联合四族（对照） | 1/2 | 6/8 | 5/6 | mixing 抢走 TNBC CD8 名字；空间靠 mixing |
-| composition | **2/2** | 0/8 | 0/6 | control 第一次齐；空间全是组成，回收为 0 |
-| density | **2/2** | 2/8 | 2/8 | 四个数据集匹配 control 都过；两条空间通过要打折 |
-| mixing | 0/2 | 6/8 | 0/8 | 能点名邻域；丰度 control 全灭，空间被挡住 |
-| point-pattern | 0/2 | 6/8 | 0/8 | 能点名 K/L；control 全灭；exclusion 擦边过 |
+| 族 | 选定 control | 空间 raw | 空间 protocol | overall raw | overall protocol | 一句话 |
+|---|---|---|---|---|---|---|
+| 联合四族（对照） | 1/2 | 6/8 | 5/6 | 7/10 | 6/10 | mixing 抢走 TNBC CD8 名字；空间靠 mixing |
+| composition | **2/2** | 0/8 | 0/6 | 2/10 | 2/10 | control 第一次齐；空间全是组成，回收为 0；overall 全是丰度分 |
+| density | **2/2** | 2/8 | 2/8 | 4/10 | 4/10 | 四个数据集匹配 control 都过；两条空间通过要打折 |
+| mixing | 0/2 | 6/8 | 0/8 | 6/10 | 0/10 | 能点名邻域；丰度 control 全灭，空间被挡住 |
+| point-pattern | 0/2 | 6/8 | 0/8 | 6/10 | 0/10 | 能点名 K/L；control 全灭；exclusion 擦边过 |
 
-没有一族同时做到：选定 control 过关 **并且** 空间 protocol 像联合表那样拿到 5/6。
+没有一族同时做到：选定 control 过关 **并且** 空间 protocol 像联合表那样拿到 5/6。`overall` 分母固定 10：composition 的 2/10 全是丰度 control；mixing / point-pattern 的 raw 6/10 全是空间 raw，protocol 掉到 0/10。
 
 ## 选定任务：回收
 

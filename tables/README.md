@@ -8,7 +8,7 @@
 | 文件 | 内容 |
 |---|---|
 | `selected_motif_catalog.csv` | 10 个 motif 的定义、样本量、组成/表达/密度 AUC |
-| `global_method_comparison.csv` | 方法总分：control、空间 raw、空间 protocol |
+| `global_method_comparison.csv` | 方法总分：control、空间 raw、空间 protocol，以及固定分母 `raw_overall` / `protocol_overall` |
 | `selected_tasks_all_methods.csv` | 每个选定任务 × 方法的 pass/fail |
 | `lasso_shap_fold_summary_all_tasks.csv` | 含匹配 control 在内的全部 tabular 任务 |
 | `lasso_selected_task_verdicts.csv` | Lasso 选定任务 |
@@ -24,13 +24,13 @@
 | `eva_embedding_probe.csv` | Eva Ridge AUC |
 | `gnn_explainer_task_summary.csv` | 节点富集、region 通过率 |
 | `gnn_explainer_selected_task_verdicts.csv` | GNN 选定任务门控 |
-| `tabular_family_method_comparison.csv` | 四族单独 Lasso/SHAP 的方法总分 |
+| `tabular_family_method_comparison.csv` | 四族单独 Lasso/SHAP 的方法总分（含 `raw_overall` / `protocol_overall`） |
 | `tabular_family_selected_task_verdicts.csv` | 四族选定任务 raw / protocol |
 | `tabular_family_selected_tasks_wide.csv` | 选定任务 × 族 × 解释器 |
 | `tabular_family_fold_summary.csv` | 四族全部任务（含匹配 control） |
 | `tabular_family_dominant_top1.csv` | 四族每个选定任务最常见 Top-1 |
 | `tabular_family_auc_compare.csv` | 单族 AUC / 回收率对照联合表 |
-| `tabular_pair_method_comparison.csv` | 六对两两 Lasso/SHAP 方法总分 |
+| `tabular_pair_method_comparison.csv` | 六对两两 Lasso/SHAP 方法总分（含 `raw_overall` / `protocol_overall`） |
 | `tabular_pair_selected_task_verdicts.csv` | 两两选定任务 raw / protocol |
 | `tabular_pair_selected_tasks_wide.csv` | 选定任务 × 两两组合 × 解释器 |
 | `tabular_pair_fold_summary.csv` | 两两全部任务（含匹配 control） |
@@ -42,8 +42,13 @@
 | `tabular_topk_precision_by_task.csv` | 按 (特征集 × 任务 × 解释器) 平均，含 `|H|` |
 | `tabular_topk_precision_method_summary.csv` | 10 任务 / 空间 / control 平均 |
 | `tabular_topk_hit_candidates.csv` | 每个 (特征集 × 任务) 的词表大小与 `|H|` |
-| `mil_noisy_combo_method_comparison.csv` | MIL noisy 六组 × 解释器总分 |
+| `mil_noisy_combo_method_comparison.csv` | MIL 六组 × 解释器总分（含 `raw_overall` / `protocol_overall`；目录名 noisy，标签实际是 clean） |
 | `mil_noisy_combo_attention_wide.csv` | Attention：选定任务 × 特征组合 |
+| `mil_ig_combo_method_comparison.csv` | 已落盘 noisy IG 三组的同一套方法总分 |
+| `mil_ig_combo_ig_wide.csv` | IG：选定任务 × 特征组合 |
+| `mil_ig_combo_selected_metrics.csv` | IG 选定任务 AUC / 定位 / 忠实性 |
+| `mil_ig_combo_selected_task_verdicts.csv` | IG 选定任务 raw / protocol |
+| `mil_ig_combo_fold_summary.csv` | IG 三组原生 summary 合并 |
 | `mil_noisy_combo_selected_metrics.csv` | 选定任务 AUC / 定位 / 忠实性 |
 | `mil_noisy_combo_selected_task_verdicts.csv` | 全部解释器选定任务 raw / protocol |
 | `mil_noisy_combo_fold_summary.csv` | 六组原生 summary 合并 |

@@ -69,6 +69,8 @@ done
 
 验收：`global_method_comparison.csv`、`tabular_family_method_comparison.csv`、`tabular_pair_method_comparison.csv`、`mil_noisy_combo_method_comparison.csv`（以及后续 MIL IG 表）都出现新列，且恒有 `raw_overall ≥ protocol_overall`。
 
+**已写完**：`score_method()` 增加 `raw_overall` / `protocol_overall`（分母固定 10，被挡空间计失败）。编译时 `assert_overall_monotone`。IG 三组同步进 `tables/mil_ig_combo_method_comparison.csv`。说明见 README「评分协议」和 [01_protocol.md](markdown/01_protocol.md)。
+
 ---
 
 ## 2. Globals：top-1 / top-3 precision
@@ -150,7 +152,7 @@ done
 | 项 | 主要产出 |
 |---|---|
 | 0 | 后续命令一律 noisy；文档纠正 `mil_noisy_*` 其实是 clean |
-| 1 | 各 `*_method_comparison.csv` 增加 `raw_overall` / `protocol_overall`；README 方法总分表 |
+| 1 | 已完成：`raw_overall` / `protocol_overall` 进各 comparison 表 + README / 01 / 08 / 09 / 11 |
 | 2 | `markdown/12_tabular_topk_precision.md` + `tables/tabular_topk_*`（clean；`02`/`08`/`09` 已加交叉引用） |
 | 3.1 / 4 | `markdown/13_mil_ig_features.md` |
 | 3.2 (c)(e) | MIL fold / summary 新列；定位文档补连续证据与多点 k |

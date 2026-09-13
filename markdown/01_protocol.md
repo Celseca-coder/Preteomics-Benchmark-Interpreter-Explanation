@@ -52,6 +52,13 @@ Control（`tumor_high` / `cd8_high`）要求 top-5 里出现对应组成或密�
 
 读结论时请同时看 **raw** 和 **protocol**。
 
+方法总分另有两列固定分母汇总（`tables/*_method_comparison.csv`）：
+
+- `raw_overall = (选定 control 通过 + 空间 raw 通过) / 10`
+- `protocol_overall = (选定 control 通过 + 空间协议通过) / 10`
+
+分母永远是选定面板的 2 个 control + 8 个空间。被匹配 control 挡住的空间任务在 `protocol_overall` 里计失败，不从分母拿掉（对比 `protocol_spatial` 的 5/6、2/6 那种浮动分母）。control 比空间容易过，2/10 可以全来自丰度任务；`raw_overall` 也会被「空间 raw 过、匹配 control 没过」抬高。**只用于排序，分项必须并排保留。** 恒有 `raw_overall ≥ protocol_overall`。
+
 ## 标签
 
 面板使用 `results/pseudo_labels/<dataset>_v2.csv`，`--label-version v2`。  

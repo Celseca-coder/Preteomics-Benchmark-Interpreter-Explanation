@@ -78,45 +78,52 @@
 
 因此表中会出现：Eva 空间 raw 8/8、protocol 0/8。这不是计算错误。
 
+各 `*_method_comparison.csv` 另有两列**固定分母**总分，被匹配 control 挡住的空间任务计失败、不移出分母：
+
+- `raw_overall = (控制通过 + 空间 raw 通过) / 10`
+- `protocol_overall = (控制通过 + 空间协议通过) / 10`
+
+选定面板永远是 2 个 control + 8 个空间。control 比空间容易过，2/10 可以全是丰度任务；`raw_overall` 也会被「空间 raw 过、匹配 control 没过」抬高（Eva 9/10 vs protocol 1/10）。**只用于方法排序，分项必须并排看。** 恒有 `raw_overall ≥ protocol_overall`。
+
 ---
 
 ## 方法总分
 
 ### Global 主方法（联合四族表格 = Lasso / SHAP）
 
-| 方法 | 选定 control | 空间 raw | 空间 protocol | 一句话 |
-|---|---|---|---|---|
-| Lasso（四族联合） | 1/2 | 6/8 | 5/6 | 选定 control 未齐；匹配 control 过关的数据集上能点名 mixing |
-| SHAP（四族联合） | 1/2 | 6/8 | 5/6 | 与联合 Lasso 同一套 pass/fail |
-| UTAG-Linear（HNC，重打分） | 2/2（仅 HNC） | 0/4（仅 HNC） | — | 能找回 marker，找不回空间 domain |
-| UTAG portraits | 2/2 | 1/8 | 0/4 | control 过，空间几乎全是肿瘤 domain |
-| KRONOS linear | 1/2 | 5/8 | 0/8 | 有弱空间信号，解释协议不过 |
-| Eva linear | 1/2 | 8/8 | 0/8 | 空间 AUC 最好的 embedding，仍无特征名 |
-| GNN Explainer | 0/2 | 0/8 | 0/8 | 节点归因未过 50% region 阈值 |
+| 方法 | 选定 control | 空间 raw | 空间 protocol | overall raw | overall protocol | 一句话 |
+|---|---|---|---|---|---|---|
+| Lasso（四族联合） | 1/2 | 6/8 | 5/6 | 7/10 | 6/10 | 选定 control 未齐；匹配 control 过关的数据集上能点名 mixing |
+| SHAP（四族联合） | 1/2 | 6/8 | 5/6 | 7/10 | 6/10 | 与联合 Lasso 同一套 pass/fail |
+| UTAG-Linear（HNC，重打分） | 2/2（仅 HNC） | 0/4（仅 HNC） | — | — | — | 能找回 marker，找不回空间 domain（只在 HNC 四任务上打分，不进 10 任务 overall） |
+| UTAG portraits | 2/2 | 1/8 | 0/4 | 3/10 | 2/10 | control 过，空间几乎全是肿瘤 domain |
+| KRONOS linear | 1/2 | 5/8 | 0/8 | 6/10 | 1/10 | 有弱空间信号，解释协议不过 |
+| Eva linear | 1/2 | 8/8 | 0/8 | **9/10** | 1/10 | 空间 AUC 最好的 embedding，仍无特征名；overall raw 被空间 raw 抬高 |
+| GNN Explainer | 0/2 | 0/8 | 0/8 | 0/10 | 0/10 | 节点归因未过 50% region 阈值 |
 
 ### 单族命名特征（同一次 `--mode tabular`，Lasso / SHAP 分列）
 
-| 特征族 | Lasso control | Lasso 空间 raw | Lasso 空间 protocol | SHAP control | SHAP 空间 raw | SHAP 空间 protocol |
-|---|---|---|---|---|---|---|
-| composition | 2/2 | 0/8 | 0/6 | 2/2 | 0/8 | 0/6 |
-| density | 2/2 | 2/8 | 2/8 | 2/2 | 2/8 | 2/8 |
-| mixing | 0/2 | 6/8 | 0/8 | 0/2 | 6/8 | 0/8 |
-| point-pattern | 0/2 | 6/8 | 0/8 | 0/2 | 6/8 | 0/8 |
+| 特征族 | Lasso control | Lasso 空间 raw | Lasso 空间 protocol | Lasso overall | SHAP control | SHAP 空间 raw | SHAP 空间 protocol | SHAP overall |
+|---|---|---|---|---|---|---|---|---|
+| composition | 2/2 | 0/8 | 0/6 | 2/10 · 2/10 | 2/2 | 0/8 | 0/6 | 2/10 · 2/10 |
+| density | 2/2 | 2/8 | 2/8 | 4/10 · 4/10 | 2/2 | 2/8 | 2/8 | 4/10 · 4/10 |
+| mixing | 0/2 | 6/8 | 0/8 | 6/10 · 0/10 | 0/2 | 6/8 | 0/8 | 6/10 · 0/10 |
+| point-pattern | 0/2 | 6/8 | 0/8 | 6/10 · 0/10 | 0/2 | 6/8 | 0/8 | 6/10 · 0/10 |
 
-单族上 Lasso 与 SHAP **任务级完全一致**。
+单族上 Lasso 与 SHAP **任务级完全一致**。`overall` 列是 `raw_overall · protocol_overall`，分母固定 10。
 
 ### 两两组合（同上，Lasso / SHAP 分列）
 
-| 组合 | Lasso control | Lasso 空间 raw | Lasso 空间 protocol | SHAP control | SHAP 空间 raw | SHAP 空间 protocol |
-|---|---|---|---|---|---|---|
-| composition + density | 2/2 | 2/8 | 2/8 | 2/2 | 2/8 | 2/8 |
-| composition + mixing | 1/2 | 6/8 | 5/6 | **0/2** | 6/8 | **1/2** |
-| density + mixing | 1/2 | 6/8 | 0/8 | 1/2 | 6/8 | 0/8 |
-| composition + point-pattern | 2/2 | 5/8 | 5/6 | 2/2 | 5/8 | 5/6 |
-| density + point-pattern | 2/2 | 6/8 | 6/8 | 2/2 | 6/8 | 6/8 |
-| mixing + point-pattern | 0/2 | 6/8 | 0/8 | 0/2 | 6/8 | 0/8 |
+| 组合 | Lasso control | Lasso 空间 raw | Lasso 空间 protocol | Lasso overall | SHAP control | SHAP 空间 raw | SHAP 空间 protocol | SHAP overall |
+|---|---|---|---|---|---|---|---|---|
+| composition + density | 2/2 | 2/8 | 2/8 | 4/10 · 4/10 | 2/2 | 2/8 | 2/8 | 4/10 · 4/10 |
+| composition + mixing | 1/2 | 6/8 | 5/6 | 7/10 · 6/10 | **0/2** | 6/8 | **1/2** | 6/10 · 1/10 |
+| density + mixing | 1/2 | 6/8 | 0/8 | 7/10 · 1/10 | 1/2 | 6/8 | 0/8 | 7/10 · 1/10 |
+| composition + point-pattern | 2/2 | 5/8 | 5/6 | 7/10 · 7/10 | 2/2 | 5/8 | 5/6 | 7/10 · 7/10 |
+| density + point-pattern | 2/2 | 6/8 | 6/8 | **8/10 · 8/10** | 2/2 | 6/8 | 6/8 | **8/10 · 8/10** |
+| mixing + point-pattern | 0/2 | 6/8 | 0/8 | 6/10 · 0/10 | 0/2 | 6/8 | 0/8 | 6/10 · 0/10 |
 
-唯一分叉：`composition + mixing` 上 Jackson `tumor_high`（Lasso 回收 0.67 过、SHAP 0.47 不过）→ SHAP 选定 control 变 0/2，Jackson 空间被匹配 control 挡住，协议分母变成 2。其余五对与对应 Lasso 一致。
+`overall` 列同样是 `raw_overall · protocol_overall`。按 protocol overall 排序，最高是 density + point-pattern（8/10），其次 composition + point-pattern（7/10）。唯一分叉：`composition + mixing` 上 Jackson `tumor_high`（Lasso 回收 0.67 过、SHAP 0.47 不过）→ SHAP 选定 control 变 0/2，Jackson 空间被匹配 control 挡住，协议分母变成 2，protocol overall 从 6/10 掉到 1/10。其余五对与对应 Lasso 一致。
 
 单族 / 两两不是把联合表拆列，而是各自重跑。明细：`tables/global_method_comparison.csv`，`tables/tabular_family_method_comparison.csv`，`tables/tabular_pair_method_comparison.csv`。说明见 [08](markdown/08_tabular_families.md)、[09](markdown/09_tabular_pairs.md)。
 
@@ -124,14 +131,14 @@
 
 对应 `logs/mil_interpreter_panel_noisy_all_combos.nohup.log` 六组已跑完。协议是定位+忠实性，不是列名正则。明细：[11_mil_noisy_combos.md](markdown/11_mil_noisy_combos.md)。
 
-| 特征组合 | 选定 control | 空间 raw | 空间 protocol |
-|---|---|---|---|
-| composition | 2/2 | 2/8 | 2/6 |
-| mixing | 2/2 | 0/8 | 0/4 |
-| celltype_density | 2/2 | 2/8 | 0/4 |
-| composition + mixing | 2/2 | 1/8 | 0/4 |
-| composition + celltype_density | 1/2 | 2/8 | 0/4 |
-| mixing + celltype_density | 2/2 | 1/8 | 0/4 |
+| 特征组合 | 选定 control | 空间 raw | 空间 protocol | overall raw | overall protocol |
+|---|---|---|---|---|---|
+| composition | 2/2 | 2/8 | 2/6 | 4/10 | 4/10 |
+| mixing | 2/2 | 0/8 | 0/4 | 2/10 | 2/10 |
+| celltype_density | 2/2 | 2/8 | 0/4 | 4/10 | 2/10 |
+| composition + mixing | 2/2 | 1/8 | 0/4 | 3/10 | 2/10 |
+| composition + celltype_density | 1/2 | 2/8 | 0/4 | 3/10 | 1/10 |
+| mixing + celltype_density | 2/2 | 1/8 | 0/4 | 3/10 | 2/10 |
 
 Attention 最强仍是 composition（仅 HNC 两条空间 protocol 过）。同设定下 IG 在 composition 上可达 5/6，说明 attention 权重常对不齐几何证据。
 

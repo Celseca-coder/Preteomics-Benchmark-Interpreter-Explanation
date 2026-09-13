@@ -94,6 +94,10 @@ def score_method(method: str, rows: pd.DataFrame, pass_col: str, panel: pd.DataF
             else:
                 n_spatial_pass += int(raw)
     scored = n_spatial - n_blocked
+    n_overall = n_ctrl + n_spatial
+    n_overall_raw = n_ctrl_pass + n_spatial_raw
+    n_overall_protocol = n_ctrl_pass + n_spatial_pass
+    denom = f"{n_overall}" if n_overall else "0"
     summary = dict(
         method=method,
         n_control=n_ctrl,
@@ -107,8 +111,24 @@ def score_method(method: str, rows: pd.DataFrame, pass_col: str, panel: pd.DataF
         protocol_spatial=f"{n_spatial_pass}/{scored}" if scored else f"0/{n_spatial}",
         raw_spatial=f"{n_spatial_raw}/{n_spatial}",
         protocol_control=f"{n_ctrl_pass}/{n_ctrl}",
+        # Fixed denominator: blocked spatial tasks count as failures, not dropped.
+        raw_overall=f"{n_overall_raw}/{denom}",
+        protocol_overall=f"{n_overall_protocol}/{denom}",
     )
     return pd.DataFrame(out), summary
+
+
+def assert_overall_monotone(frame: pd.DataFrame, name: str) -> None:
+    """raw_overall ≥ protocol_overall: protocol never credits a raw failure."""
+    if frame is None or frame.empty:
+        return
+    raw_n = frame["n_control_passed"] + frame["n_spatial_passed_raw"]
+    prot_n = frame["n_control_passed"] + frame["n_spatial_passed_protocol"]
+    bad = frame.loc[raw_n.to_numpy() < prot_n.to_numpy()]
+    if not bad.empty:
+        cols = ["method", "raw_overall", "protocol_overall"]
+        cols = [c for c in cols if c in bad.columns]
+        raise RuntimeError(f"{name}: raw_overall < protocol_overall\n{bad[cols].to_string(index=False)}")
 
 
 def top1_freq(ranks: pd.DataFrame, method: str) -> pd.DataFrame:
@@ -334,16 +354,38 @@ def export_recovery_regex() -> None:
     pd.DataFrame(wide).to_csv(OUT / "tabular_recovery_regex_by_task.csv", index=False)
 
 
+MIL_NOISY_DIRS = {
+    "composition": PANEL_DIR / "mil_noisy_composition",
+    "mixing": PANEL_DIR / "mil_noisy_mixing",
+    "celltype_density": PANEL_DIR / "mil_noisy_celltype_density",
+    "composition_mixing": PANEL_DIR / "mil_noisy_composition_mixing",
+    "composition_celltype_density": PANEL_DIR / "mil_noisy_composition_celltype_density",
+    "mixing_celltype_density": PANEL_DIR / "mil_noisy_mixing_celltype_density",
+}
+
+MIL_IG_DIRS = {
+    "composition_mixing": PANEL_DIR / "mil_ig_composition_mixing",
+    "mixing": PANEL_DIR / "mil_ig_mixing",
+    "mixing_celltype_density": PANEL_DIR / "mil_ig_mixing_celltype_density",
+}
+
+
 def compile_mil_noisy_combos(panel: pd.DataFrame) -> pd.DataFrame:
-    """Score AttnMIL noisy feature-group combos (attention + instance explainers)."""
-    combo_dirs = {
-        "composition": PANEL_DIR / "mil_noisy_composition",
-        "mixing": PANEL_DIR / "mil_noisy_mixing",
-        "celltype_density": PANEL_DIR / "mil_noisy_celltype_density",
-        "composition_mixing": PANEL_DIR / "mil_noisy_composition_mixing",
-        "composition_celltype_density": PANEL_DIR / "mil_noisy_composition_celltype_density",
-        "mixing_celltype_density": PANEL_DIR / "mil_noisy_mixing_celltype_density",
-    }
+    """Score AttnMIL feature-group combos (attention + instance explainers)."""
+    return compile_mil_combos(panel, MIL_NOISY_DIRS, "mil_noisy_combo", "attention")
+
+
+def compile_mil_ig_combos(panel: pd.DataFrame) -> pd.DataFrame:
+    """Score already-landed noisy IG feature-attribution runs with the same overall columns."""
+    return compile_mil_combos(panel, MIL_IG_DIRS, "mil_ig_combo", "ig")
+
+
+def compile_mil_combos(
+    panel: pd.DataFrame,
+    combo_dirs: dict[str, Path],
+    out_stem: str,
+    wide_explainer: str,
+) -> pd.DataFrame:
     fold_frames = []
     verdict_frames = []
     summaries = []
@@ -408,12 +450,12 @@ def compile_mil_noisy_combos(panel: pd.DataFrame) -> pd.DataFrame:
     folds = pd.concat(fold_frames, ignore_index=True)
     verdicts = pd.concat(verdict_frames, ignore_index=True)
     comparison = pd.DataFrame(summaries)
-    folds.to_csv(OUT / "mil_noisy_combo_fold_summary.csv", index=False)
-    verdicts.to_csv(OUT / "mil_noisy_combo_selected_task_verdicts.csv", index=False)
-    comparison.to_csv(OUT / "mil_noisy_combo_method_comparison.csv", index=False)
-    pd.DataFrame(metric_rows).to_csv(OUT / "mil_noisy_combo_selected_metrics.csv", index=False)
+    folds.to_csv(OUT / f"{out_stem}_fold_summary.csv", index=False)
+    verdicts.to_csv(OUT / f"{out_stem}_selected_task_verdicts.csv", index=False)
+    comparison.to_csv(OUT / f"{out_stem}_method_comparison.csv", index=False)
+    pd.DataFrame(metric_rows).to_csv(OUT / f"{out_stem}_selected_metrics.csv", index=False)
 
-    att = verdicts[verdicts["explainer"] == "attention"]
+    att = verdicts[verdicts["explainer"] == wide_explainer]
     wide_rows = []
     for dataset, task in sorted(selected):
         row = dict(dataset=dataset, task=task, kind=kind_of(task))
@@ -428,7 +470,7 @@ def compile_mil_noisy_combos(panel: pd.DataFrame) -> pd.DataFrame:
                 row[f"{combo}_raw"] = "pass" if bool(sub.raw_passed.iloc[0]) else "fail"
                 row[f"{combo}_verdict"] = sub.verdict.iloc[0]
         wide_rows.append(row)
-    pd.DataFrame(wide_rows).to_csv(OUT / "mil_noisy_combo_attention_wide.csv", index=False)
+    pd.DataFrame(wide_rows).to_csv(OUT / f"{out_stem}_{wide_explainer}_wide.csv", index=False)
     return comparison
 
 
@@ -540,7 +582,9 @@ def main() -> None:
     summaries = [lasso_sum, shap_sum, kronos_sum, eva_sum, utag_sum]
     if gnn_sum:
         summaries.append(gnn_sum)
-    pd.DataFrame(summaries).to_csv(OUT / "global_method_comparison.csv", index=False)
+    global_cmp = pd.DataFrame(summaries)
+    global_cmp.to_csv(OUT / "global_method_comparison.csv", index=False)
+    assert_overall_monotone(global_cmp, "global_method_comparison")
 
     # selected-task wide table for markdown
     method_frames = [
@@ -595,18 +639,36 @@ def main() -> None:
     family_cmp, _ = compile_tabular_families(panel)
     pair_cmp, _ = compile_tabular_pairs(panel)
     mil_cmp = compile_mil_noisy_combos(panel)
+    mil_ig_cmp = compile_mil_ig_combos(panel)
+    assert_overall_monotone(family_cmp, "tabular_family_method_comparison")
+    assert_overall_monotone(pair_cmp, "tabular_pair_method_comparison")
+    assert_overall_monotone(mil_cmp, "mil_noisy_combo_method_comparison")
+    assert_overall_monotone(mil_ig_cmp, "mil_ig_combo_method_comparison")
 
+    overall_cols = [
+        "method", "protocol_control", "raw_spatial", "protocol_spatial",
+        "raw_overall", "protocol_overall",
+    ]
     print("Wrote", OUT)
-    print(pd.DataFrame(summaries).to_string(index=False))
+    print(global_cmp[overall_cols].to_string(index=False))
     print("\nSingle-family Lasso/SHAP")
-    print(family_cmp.to_string(index=False))
+    print(family_cmp[overall_cols + ["family", "explainer"]].to_string(index=False))
     print("\nPairwise Lasso/SHAP")
-    print(pair_cmp.to_string(index=False))
+    print(pair_cmp[overall_cols + ["family", "explainer"]].to_string(index=False))
     if mil_cmp is not None and not mil_cmp.empty:
         print("\nMIL noisy combos (attention)")
         print(
             mil_cmp[mil_cmp["explainer"] == "attention"][
-                ["combo", "protocol_control", "raw_spatial", "protocol_spatial"]
+                ["combo", "protocol_control", "raw_spatial", "protocol_spatial",
+                 "raw_overall", "protocol_overall"]
+            ].to_string(index=False)
+        )
+    if mil_ig_cmp is not None and not mil_ig_cmp.empty:
+        print("\nMIL IG combos")
+        print(
+            mil_ig_cmp[
+                ["combo", "explainer", "protocol_control", "raw_spatial",
+                 "protocol_spatial", "raw_overall", "protocol_overall"]
             ].to_string(index=False)
         )
 
